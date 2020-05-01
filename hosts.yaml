@@ -1,0 +1,9 @@
+---
+all:
+  hosts:
+    localhost:
+  children:
+    NeedsFullTestSetup:
+      hosts:
+        17.181.30.21:
+...
