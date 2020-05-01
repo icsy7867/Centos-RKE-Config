@@ -3,7 +3,7 @@ all:
   hosts:
     localhost:
   children:
-    NeedsFullTestSetup:
+    RancherSetup:
       hosts:
         17.181.30.21:
 ...

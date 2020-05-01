@@ -1,5 +1,5 @@
 ---
-- hosts: NeedsFullTestSetup
+- hosts: RancherSetup
   roles:
   - ranchernode
   remote_user: root
@@ -43,25 +43,7 @@
   - name: "nodetype"
     prompt: "Is this going to be a Rancher Master Node? (Y\N)"
     private: no
-    default: "N"
+    default: "Y"
     confirm: yes
 
-  - name: "adminname"
-    prompt: "What is your Domain Admin Username?"
-    private: no
-
-  - name: !unsafe "adminpassword"
-    prompt: "What is your Domain Admin Password?"
-    private: yes
-    no_log: true
-    confirm: yes
-
-#  - name: "integrationkey"
-#    prompt: "What is your Duo Integration Key?"
-
-#  - name: "secretkey"
-#    prompt: "What is your Duo Secret Key?"
-
-#  - name: "apihostname"
-#    prompt: "What is your Duo API Hostname?"
 ...
