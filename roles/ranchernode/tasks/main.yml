@@ -1,0 +1,95 @@
+---
+- name: Set User Namespaces sysctl value
+  sysctl:
+    name: user.max_user_namespaces
+    value: '15064'
+    sysctl_file: /etc/sysctl.d/00-namespaces.conf
+
+- name: Set kubelet overcommit memory
+  sysctl:
+    name: vm.overcommit_memory
+    value: '1'
+    sysctl_file: /etc/sysctl.d/90-kubelet.conf
+
+- name: Set kubelet panic_on_oom
+  sysctl:
+    name: vm.panic_on_oom
+    value: '0'
+    sysctl_file: /etc/sysctl.d/90-kubelet.conf
+
+- name: Set kubelet kernel panic
+  sysctl:
+    name: kernel.panic
+    value: '10'
+    sysctl_file: /etc/sysctl.d/90-kubelet.conf
+
+- name: Set kubelet kernel panic
+  sysctl:
+    name: kernel.panic_on_oops
+    value: '1'
+    sysctl_file: /etc/sysctl.d/90-kubelet.conf
+
+- name: Set kubelet kernel panic
+  sysctl:
+    name: kernel.keys.root_maxbytes
+    value: '25000000'
+    sysctl_file: /etc/sysctl.d/90-kubelet.conf
+
+- name: Add etcd group
+  group:
+    name: etcd
+    gid: 52034
+
+- name: Add etcd user
+  user:
+    name: etcd
+    uid: 52034
+    comment: "etcd service account"
+    group: etcd
+
+- name: Add Docker CE repo
+  yum_repository:
+    name: docker-ce-stable
+    description: Docker CE Stable - $basearch
+    baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
+    file: /etc/yum.repos.d/docker-ce.repo
+    gpgcheck: yes
+    gpgkey: https://download.docker.com/linux/centos/gpg
+    enabled: yes
+
+- name: Install Docker CE
+  yum:
+    name:
+      - docker-ce
+      - docker-ce-cli
+    state: present
+
+- name: Add Rancher user
+  user:
+    name: rancher
+    comment: "Rancher user account"
+    groups: docker
+    append: yes
+    state: present
+
+- name: Enable and start Docker service
+  systemd:
+    state: started
+    name: docker
+    enabled: yes
+
+- name: Set Kernel Modules
+  include_tasks: kernel.yml
+  when: nodetype == "Y"
+
+- name: Set Rancher master firewall rules if we are a master node
+  include_tasks: rancherrules.yml
+  when: nodetype == "Y"
+
+- name: Set Rancher worker node firewall rules port 30000-32767 udp
+  firewalld:
+    port: 30000-32767/udp
+    permanent: yes
+    state: enabled
+    immediate: yes
+...

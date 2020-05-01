@@ -1,0 +1,6 @@
+---
+vars:
+  localsudoers:
+    - "#Allow project personnel to do rooty things"
+    - "jrenfroe6a@icl.gtri.org ALL=(ALL) NOPASSWD: ALL"
+...

@@ -1,0 +1,50 @@
+---
+- name: Set Rancher master node firewall rules port 2376
+  firewalld:
+    port: 2376/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+
+- name: Set Rancher master node firewall rules port 2379-2380
+  firewalld:
+    port: 2379-2380/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+
+- name: Set Rancher master node firewall rules port 8472
+  firewalld:
+    port: 8472/udp
+    permanent: yes
+    state: enabled
+    immediate: yes
+
+- name: Set Rancher master node firewall rules port 10250
+  firewalld:
+    port: 10250/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+
+- name: Set Rancher master node firewall rules port 80
+  firewalld:
+    port: 80/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+
+- name: Set Rancher master node firewall rules port 443
+  firewalld:
+    port: 443/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+
+- name: Set Rancher master node firewall rules port 6443
+  firewalld:
+    port: 6443/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+...

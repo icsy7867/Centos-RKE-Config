@@ -1,0 +1,67 @@
+---
+- hosts: NeedsFullTestSetup
+  roles:
+  - ranchernode
+  remote_user: root
+
+  vars:
+    kernel_modules:
+      - br_netfilter
+      - ip6_udp_tunnel
+      - ip_set
+      - ip_set_hash_ip
+      - ip_set_hash_net
+      - iptable_filter
+      - iptable_nat
+      - iptable_mangle
+      - iptable_raw
+      - nf_conntrack_netlink
+      - nf_conntrack
+      - nf_conntrack_ipv4
+      - nf_defrag_ipv4
+      - nf_nat
+      - nf_nat_ipv4
+      - nf_nat_masquerade_ipv4
+      - nfnetlink
+      - udp_tunnel
+      - veth
+      - vxlan
+      - x_tables
+      - xt_addrtype
+      - xt_conntrack
+      - xt_comment
+      - xt_mark
+      - xt_multiport
+      - xt_nat
+      - xt_recent
+      - xt_set
+      - xt_statistic
+      - xt_tcpudp  
+
+  vars_prompt:
+
+  - name: "nodetype"
+    prompt: "Is this going to be a Rancher Master Node? (Y\N)"
+    private: no
+    default: "N"
+    confirm: yes
+
+  - name: "adminname"
+    prompt: "What is your Domain Admin Username?"
+    private: no
+
+  - name: !unsafe "adminpassword"
+    prompt: "What is your Domain Admin Password?"
+    private: yes
+    no_log: true
+    confirm: yes
+
+#  - name: "integrationkey"
+#    prompt: "What is your Duo Integration Key?"
+
+#  - name: "secretkey"
+#    prompt: "What is your Duo Secret Key?"
+
+#  - name: "apihostname"
+#    prompt: "What is your Duo API Hostname?"
+...
