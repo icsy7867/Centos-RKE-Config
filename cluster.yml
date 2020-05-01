@@ -1,6 +1,13 @@
 nodes:
-  - address: 17.181.30.21
-    user: core
+  - address: 17.181.30.25
+    user: rancher
+    role:
+      - controlplane
+      - etcd
+      - worker
+
+  - address: 17.181.30.26
+    user: rancher
     role:
       - controlplane
       - etcd
