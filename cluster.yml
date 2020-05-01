@@ -1,0 +1,21 @@
+nodes:
+  - address: 17.181.30.21
+    user: core
+    role:
+      - controlplane
+      - etcd
+      - worker
+
+services:
+  etcd:
+    image: quay.io/coreos/etcd:latest
+  kube-api:
+    image: rancher/k8s:v1.8.3-rancher2
+  kube-controller:
+    image: rancher/k8s:v1.8.3-rancher2
+  scheduler:
+    image: rancher/k8s:v1.8.3-rancher2
+  kubelet:
+    image: rancher/k8s:v1.8.3-rancher2
+  kubeproxy:
+    image: rancher/k8s:v1.8.3-rancher2
