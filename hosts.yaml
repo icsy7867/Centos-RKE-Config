@@ -5,5 +5,5 @@ all:
   children:
     RancherSetup:
       hosts:
-        17.181.30.26:
+        localhost:
 ...

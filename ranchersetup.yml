@@ -41,7 +41,7 @@
   vars_prompt:
 
   - name: "nodetype"
-    prompt: "Is this going to be a Rancher Master Node? (Y\N)"
+    prompt: "Is this going to be a Rancher Master Node? (Y\\N)"
     private: no
     default: "Y"
     confirm: yes
